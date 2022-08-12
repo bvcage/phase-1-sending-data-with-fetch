@@ -17,8 +17,11 @@ function submitData (userName, userEmail) {
     .then(function (response) {
         return response.json();
     })
-    .then(function (object) {
-        console.log(object);
+    .then(function (userObject) {
+        console.log(document.querySelector('body'));
+        const newPara = document.createElement('p');
+        newPara.textContent = userObject.id;
+        document.querySelector('body').appendChild(newPara);
     });
 }
 
