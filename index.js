@@ -6,49 +6,23 @@ const postUserData = (userName, userEmail) => {
             "Accept" : "application/json"
         },
         body: JSON.stringify({
-            "name": userName,
-            "email": userEmail
+            name: userName,
+            email: userEmail
         }),
     }
 };
 
 function submitData (userName, userEmail) {
-    fetch("http://localhost:3000/users", postUserData(userName, userEmail))
+    return fetch("http://localhost:3000/users", postUserData(userName, userEmail))
     .then(function (response) {
         return response.json();
     })
     .then(function (userObject) {
-        console.log(document.querySelector('body'));
-        const newPara = document.createElement('p');
-        newPara.textContent = userObject.id;
-        document.querySelector('body').appendChild(newPara);
+        document.querySelector('body').append(userObject.id);
+    })
+    .catch(function (error) {
+        document.querySelector('body').append(error.message);
     });
 }
 
 submitData("test", "test2");
-
-
-
-
-
-// const formData = {
-//     dogName: "Byron",
-//     dogBreed: "Poodle",
-//   };
-  
-//   const configurationObject = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Accept": "application/json",
-//     },
-//     body: JSON.stringify(formData),
-//   };
-  
-//   fetch("http://localhost:3000/dogs", configurationObject)
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (object) {
-//     console.log(object);
-//   });
